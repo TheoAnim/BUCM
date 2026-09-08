@@ -33,16 +33,8 @@ knitr::opts_chunk$set(
 }
 ```
 
-**BUCM** (Bayesian Underreported Count Models) is an R package for Bayesian
-analysis of count data with and without underreporting. The package provides
-one-sample and two-sample Poisson, zero-inflated Poisson (ZIP), and negative
-binomial models.
-
-BUCM includes both naive models, which assume no underreporting, and
-underreported models that account for incomplete reporting. Model estimation
-is performed using Markov chain Monte Carlo (MCMC) methods through JAGS.
-
-Model comparison is available using DIC, WAIC, and PSIS-LOO.
+**BUCM** (Bayesian Underreported Count Models) is an R package for Bayesian analysis of count data with accounting for potential underreporting. The package provides estimation for one-sample and two-sample Poisson, zero-inflated Poisson (ZIP), and negative binomial models. The package assumes either a validation sub-sample or informative priors are available as additional inputs with the main study data.
+BUCM provides estimates for naive models, which assume no underreporting, and underreported models that account for incomplete reporting. Model estimation is performed using Markov chain Monte Carlo (MCMC) methods through JAGS.  The package also performs model comparison using DIC, WAIC, and PSIS-LOO in order to determine which of the three count data models fits the observed data the best.
 
 ## Installation
 
