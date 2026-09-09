@@ -51,7 +51,7 @@ As an example, we simulate data from Poisson subject to underreporting. Assume s
 $$Y^{\ast} \sim Poisson(\lambda)$$ 
 where $\lambda > 0$ is the expected(true) count.
 
-For all units, the reported count $Y$ arises from a binomial mechanism. Conditional on the true count $T^{\ast}$,
+For all units, the reported count $Y$ arises from a binomial mechanism. Conditional on the true count $Y^{\ast}$,
 $$Y|y^{\ast} \sim Binomial(y^{\ast}, p)$$ 
 where $p$ denotes the reporting probability.
 
