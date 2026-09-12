@@ -8,7 +8,7 @@
 #'   Poisson, ZIP (zero-inflated Poisson), and negative binomial models.
 #' @param thresh Numeric threshold for model comparison (default = 2).
 #'
-#' @export
+#@export
 waic_comparison <- function(models, thresh) {
   model_names <- c("poisson", "zip", "negbinom")
   waic_values <- furrr::future_map(models, \(x) x$BUGSoutput$sims.list$loglik) |>

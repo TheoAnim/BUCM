@@ -1,0 +1,22 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/vignette.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/loo_comparison.html</loc></url>
+<url><loc>/reference/urc_HPD.html</loc></url>
+<url><loc>/reference/urc_acf.html</loc></url>
+<url><loc>/reference/urc_density.html</loc></url>
+<url><loc>/reference/urc_hist.html</loc></url>
+<url><loc>/reference/urc_mcmc.html</loc></url>
+<url><loc>/reference/urc_mcmc_naive.html</loc></url>
+<url><loc>/reference/urc_posterior_summary.html</loc></url>
+<url><loc>/reference/urc_trace.html</loc></url>
+<url><loc>/reference/urc_two_mcmc.html</loc></url>
+<url><loc>/reference/urc_two_mcmc_naive.html</loc></url>
+<url><loc>/reference/urcdata_gen.html</loc></url>
+<url><loc>/reference/waic_comparison.html</loc></url>
+</urlset>
+
