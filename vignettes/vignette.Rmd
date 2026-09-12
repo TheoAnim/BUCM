@@ -1,8 +1,8 @@
 ---
-title: "Bayesian Underreported Count Model"
+title: "Bayesian Underreported Count Models"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Bayesian Underreported Count Model}
+  %\VignetteIndexEntry{Bayesian Underreported Count Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
