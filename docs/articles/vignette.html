@@ -216,42 +216,24 @@ specify the parameters; otherwise, log-likelihoods will be included.</p>
 <p><img src="vignette_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="90%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
-<h4 id="posterior-summaries">Posterior Summaries<a class="anchor" aria-label="anchor" href="#posterior-summaries"></a>
-</h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">poisson</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">BUCM</span><span class="fu">::</span><span class="fu"><a href="../reference/urc_posterior_summary.html">urc_posterior_summary</a></span><span class="op">(</span>exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mu"</span>, <span class="st">"deviance"</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        mean    sd 2.5%  50% 97.5% Rhat n.eff</span></span>
-<span><span class="co">#&gt; lambda 5.00 0.160 4.70 5.00  5.30    1  2000</span></span>
-<span><span class="co">#&gt; p      0.69 0.017 0.65 0.69  0.72    1  1884</span></span></code></pre></div>
-<p>Posterior summaries can also be obtained using
-<code>MCMCvis</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">poisson</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">MCMCvis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MCMCvis/man/MCMCsummary.html" class="external-link">MCMCsummary</a></span><span class="op">(</span>params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lambda"</span>, <span class="st">"p"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             mean         sd      2.5%       50%     97.5% Rhat n.eff</span></span>
-<span><span class="co">#&gt; lambda 5.0163106 0.15904592 4.7118912 5.0144230 5.3415684    1  2000</span></span>
-<span><span class="co">#&gt; p      0.6890235 0.01735544 0.6544488 0.6893771 0.7219655    1  1884</span></span></code></pre></div>
-</div>
-<div class="section level4">
 <h4 id="model-selection">Model Selection<a class="anchor" aria-label="anchor" href="#model-selection"></a>
 </h4>
 <p>Values of each criterion for the three models</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using DIC for model selection</span></span>
 <span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">dics</span> </span>
 <span><span class="co">#&gt;   model_names      DIC</span></span>
 <span><span class="co">#&gt; 1     poisson 1907.629</span></span>
 <span><span class="co">#&gt; 2         zip 1952.435</span></span>
 <span><span class="co">#&gt; 3    negbinom 1913.327</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using WAIC for model selection</span></span>
 <span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">waics</span> </span>
 <span><span class="co">#&gt;   model_names     waic</span></span>
 <span><span class="co">#&gt; 1     poisson 1907.194</span></span>
 <span><span class="co">#&gt; 2         zip 1908.704</span></span>
 <span><span class="co">#&gt; 3    negbinom 1910.693</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using PSIS-LOO for model selection</span></span>
 <span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">loos</span></span>
 <span><span class="co">#&gt;   model_names      loo</span></span>
@@ -260,7 +242,7 @@ specify the parameters; otherwise, log-likelihoods will be included.</p>
 <span><span class="co">#&gt; 3    negbinom 1910.701</span></span></code></pre></div>
 <p>Show plausible model selected as being parsimonious or having the
 smallest criterion value</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DIC"</span>, <span class="st">"WAIC"</span>, <span class="st">"LOO"</span><span class="op">)</span>,</span>
 <span>  <span class="st">"Best Selected"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -273,6 +255,24 @@ smallest criterion value</p>
 <span><span class="co">#&gt; 1   DIC       poisson</span></span>
 <span><span class="co">#&gt; 2  WAIC       poisson</span></span>
 <span><span class="co">#&gt; 3   LOO       poisson</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="posterior-summaries">Posterior Summaries<a class="anchor" aria-label="anchor" href="#posterior-summaries"></a>
+</h4>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">poisson</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">BUCM</span><span class="fu">::</span><span class="fu"><a href="../reference/urc_posterior_summary.html">urc_posterior_summary</a></span><span class="op">(</span>exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mu"</span>, <span class="st">"deviance"</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        mean    sd 2.5%  50% 97.5% Rhat n.eff</span></span>
+<span><span class="co">#&gt; lambda 5.00 0.160 4.70 5.00  5.30    1  2000</span></span>
+<span><span class="co">#&gt; p      0.69 0.017 0.65 0.69  0.72    1  1884</span></span></code></pre></div>
+<p>Posterior summaries can also be obtained using
+<code>MCMCvis</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">poisson</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">MCMCvis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MCMCvis/man/MCMCsummary.html" class="external-link">MCMCsummary</a></span><span class="op">(</span>params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lambda"</span>, <span class="st">"p"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             mean         sd      2.5%       50%     97.5% Rhat n.eff</span></span>
+<span><span class="co">#&gt; lambda 5.0163106 0.15904592 4.7118912 5.0144230 5.3415684    1  2000</span></span>
+<span><span class="co">#&gt; p      0.6890235 0.01735544 0.6544488 0.6893771 0.7219655    1  1884</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">

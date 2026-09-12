@@ -148,19 +148,6 @@ bayesplot::mcmc_dens(jm_poisson_array, pars = c("lambda", "p"))
 bayesplot::mcmc_acf(jm_poisson_array, pars = c("lambda", "p"))
 ```
 
-### Posterior Summaries
-
-```{r}
-bayes_count_models$models$poisson |>
-  BUCM::urc_posterior_summary(exclude = c("mu", "deviance"), digits = 2)
-```
-
-Posterior summaries can also be obtained using `MCMCvis`.
-```{r}
-bayes_count_models$models$poisson |> 
-  MCMCvis::MCMCsummary(params = c("lambda", "p"))
-```
-
 ### Model Selection
 
 Values of each criterion for the three models
@@ -192,6 +179,20 @@ data.frame(
   )
 )
 ```
+
+### Posterior Summaries
+
+```{r}
+bayes_count_models$models$poisson |>
+  BUCM::urc_posterior_summary(exclude = c("mu", "deviance"), digits = 2)
+```
+
+Posterior summaries can also be obtained using `MCMCvis`.
+```{r}
+bayes_count_models$models$poisson |> 
+  MCMCvis::MCMCsummary(params = c("lambda", "p"))
+```
+
 
 
 ## No validation data
