@@ -1,0 +1,13 @@
+citHeader("To cite BUCM, please use:")
+
+bibentry(
+  bibtype = "Misc",
+  title = "BUCM: An R package for Bayesian modeling of one and two sample count models with underreporting",
+  author = personList(
+    person("Theophilus", family = "Anim Bediako"),
+    person("Jamie L.", family = "Roberman"),
+    person("Jackson", family = "Barth"),
+    person("James D.", family = "Stamey")
+  ),
+  year = "2026"
+)

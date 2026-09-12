@@ -1,8 +1,10 @@
 Package: BUCM
 Title: Bayesian Modeling of Underreported Count Data
 Version: 1.0.0
-Authors@R: 
-    person("Theophilus", "Anim Bediako", , "theophilus.animbediako@gmail.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Theophilus", "Anim Bediako",
+           email = "theophilus.animbediako@gmail.com",
+           role = c("aut", "cre")))
 Description: Tools for modeling underreported count data using Bayesian inference. 
     Supports Poisson, Negative Binomial, and Zero-Inflated models with option to incorporate validation data.
 License: MIT
