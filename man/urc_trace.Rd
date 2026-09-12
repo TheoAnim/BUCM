@@ -2,7 +2,7 @@
 % Please edit documentation in R/urc_trace.R
 \name{urc_trace}
 \alias{urc_trace}
-\title{Plot MCMC Trace Plots}
+\title{Plot MCMC Trace}
 \usage{
 urc_trace(
   model,

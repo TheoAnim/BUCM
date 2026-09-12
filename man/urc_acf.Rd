@@ -2,7 +2,7 @@
 % Please edit documentation in R/urc_acf.R
 \name{urc_acf}
 \alias{urc_acf}
-\title{Plot Posterior Autocorrelation Functions}
+\title{Plot Posterior Autocorrelation}
 \usage{
 urc_acf(
   model,

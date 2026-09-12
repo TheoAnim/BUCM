@@ -1,4 +1,4 @@
-#' @title Plot Posterior Autocorrelation Functions
+#' @title Plot Posterior Autocorrelation
 #'
 #' @description
 #' Creates autocorrelation function (ACF) plots for posterior samples

@@ -1,4 +1,4 @@
-#' @title Plot MCMC Trace Plots
+#' @title Plot MCMC Trace
 #'
 #' @description
 #' Creates trace plots for posterior samples from a JAGS MCMC model.
