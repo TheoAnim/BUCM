@@ -1,14 +1,6 @@
-#' Compare Models Using Paretho-Smoothed Importance Sampling Leave-One-Out
-#'
-#' Calculates the PSIS-LOO for multiple
-#' Bayesian models fit using JAGS and returns a comparison table.
-#'
-#' @param models A list containing JAGS `models` for Poisson, ZIP and Negative Binomial
-#'   element which is a list of r2jags output objects, typically containing
-#'   Poisson, ZIP (zero-inflated Poisson), and negative binomial models.
-#' @param thresh Numeric threshold for model comparison (default = 2).
-#'
-#@export
+# Compare Models Using Paretho-Smoothed Importance Sampling Leave-One-Out
+# Calculates the PSIS-LOO for multiple
+# Bayesian models fit using JAGS and returns a comparison table.
 loo_comparison <- function(models, thresh) {
   # models <- jagsoutput$models
   model_names <- c("poisson", "zip", "negbinom")

@@ -1,4 +1,6 @@
-#' @title Function to generate data
+# Function to generate data
+# I made this function for my simulation
+# But not that important to be exported
 urcdata_gen <- function(lambda, p, pi = 0, c = 1, nobs = 100, nv = 0, fun) {
   if (fun == "rpois") {
     ystar <- stats::rpois(nv, lambda)
