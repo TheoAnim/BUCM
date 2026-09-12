@@ -83,7 +83,8 @@ potential underreporting. The package provides estimation for one-sample
 and two-sample Poisson, zero-inflated Poisson (ZIP), and negative
 binomial models. The package assumes either a validation sub-sample or
 informative priors are available as additional inputs with the main
-study data. BUCM provides estimates for naive models, which assume no
+study data.</p>
+<p>BUCM provides estimates for naive models, which assume no
 underreporting, and underreported models that account for incomplete
 reporting. Model estimation is performed using Markov chain Monte Carlo
 (MCMC) methods through JAGS. The package also performs model comparison
@@ -102,11 +103,11 @@ count data models fits the observed data the best.</p>
 </h3>
 <p>As an example, we simulate data from Poisson subject to
 underreporting. Assume some validation data through which we know the
-true(latent) event count denoted by
+true (latent) event count denoted by
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mo>*</mo></msup><mo>∼</mo><mi>P</mi><mi>o</mi><mi>i</mi><mi>s</mi><mi>s</mi><mi>o</mi><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y^{\ast} \sim Poisson(\lambda)</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda &gt; 0</annotation></semantics></math>
-is the expected(true) count.</p>
+is the expected (true) count.</p>
 <p>For all units, the reported count
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
 arises from a binomial mechanism. Conditional on the true count
@@ -115,7 +116,7 @@ arises from a binomial mechanism. Conditional on the true count
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
 denotes the reporting probability.</p>
-<p>For the remaining units(the main study sample), only the
+<p>For the remaining units (the main study sample), only the
 underreported counts
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
 are observed. Marginally, we can derived the distribution of
@@ -132,26 +133,16 @@ as:
 <span><span class="co"># Simulation settings</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
-<span><span class="va">nv</span> <span class="op">&lt;-</span> <span class="fl">100</span>      <span class="co"># Validation sample size</span></span>
-<span><span class="va">nobs</span> <span class="op">&lt;-</span> <span class="fl">300</span>    <span class="co"># Non-validation sample size</span></span>
+<span><span class="va">nv</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># Validation sample size</span></span>
+<span><span class="va">nobs</span> <span class="op">&lt;-</span> <span class="fl">300</span> <span class="co"># Non-validation sample size</span></span>
 <span></span>
 <span><span class="co"># Validation sample: latent counts (Y*) and observed counts (Y)</span></span>
-<span><span class="va">ystar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span></span>
-<span>  <span class="va">nv</span>,</span>
-<span>  lambda <span class="op">=</span> <span class="va">lambda</span></span>
-<span><span class="op">)</span></span>
+<span><span class="va">ystar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="va">nv</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">yval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span></span>
-<span>  <span class="va">nv</span>,</span>
-<span>  size <span class="op">=</span> <span class="va">ystar</span>,</span>
-<span>  prob <span class="op">=</span> <span class="va">p</span></span>
-<span><span class="op">)</span></span>
+<span><span class="va">yval</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="va">nv</span>, size <span class="op">=</span> <span class="va">ystar</span>, prob <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Observed counts subject to underreporting</span></span>
-<span><span class="va">yobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span></span>
-<span>  <span class="va">nobs</span>,</span>
-<span>  lambda <span class="op">=</span> <span class="va">lambda</span> <span class="op">*</span> <span class="va">p</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">yobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="va">nobs</span>, lambda <span class="op">=</span> <span class="va">lambda</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span></span></code></pre></div>
 <p>Here, <code>ystar</code> contains the true counts in the validation
 sample, <code>yval</code> contains the corresponding reported counts
 generated through the binomial reporting mechanism, and
@@ -245,88 +236,30 @@ specify the parameters; otherwise, log-likelihoods will be included.</p>
 <div class="section level4">
 <h4 id="model-selection">Model Selection<a class="anchor" aria-label="anchor" href="#model-selection"></a>
 </h4>
-<ol style="list-style-type: lower-alpha">
-<li>Return values for each criterion for each model</li>
-</ol>
+<p>Values of each criterion for the three models</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using DIC for model selection</span></span>
-<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">dics</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"DIC Comparison"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>DIC Comparison</caption>
-<thead><tr class="header">
-<th align="left">model_names</th>
-<th align="right">DIC</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">poisson</td>
-<td align="right">1907.629</td>
-</tr>
-<tr class="even">
-<td align="left">zip</td>
-<td align="right">1952.435</td>
-</tr>
-<tr class="odd">
-<td align="left">negbinom</td>
-<td align="right">1913.327</td>
-</tr>
-</tbody>
-</table>
+<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">dics</span> </span>
+<span><span class="co">#&gt;   model_names      DIC</span></span>
+<span><span class="co">#&gt; 1     poisson 1907.629</span></span>
+<span><span class="co">#&gt; 2         zip 1952.435</span></span>
+<span><span class="co">#&gt; 3    negbinom 1913.327</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using WAIC for model selection</span></span>
-<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">waics</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"WAIC Comparison"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>WAIC Comparison</caption>
-<thead><tr class="header">
-<th align="left">model_names</th>
-<th align="right">waic</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">poisson</td>
-<td align="right">1907.194</td>
-</tr>
-<tr class="even">
-<td align="left">zip</td>
-<td align="right">1908.704</td>
-</tr>
-<tr class="odd">
-<td align="left">negbinom</td>
-<td align="right">1910.693</td>
-</tr>
-</tbody>
-</table>
+<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">waics</span> </span>
+<span><span class="co">#&gt;   model_names     waic</span></span>
+<span><span class="co">#&gt; 1     poisson 1907.194</span></span>
+<span><span class="co">#&gt; 2         zip 1908.704</span></span>
+<span><span class="co">#&gt; 3    negbinom 1910.693</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using PSIS-LOO for model selection</span></span>
-<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">loos</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"PSIS-LOO Comparison"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>PSIS-LOO Comparison</caption>
-<thead><tr class="header">
-<th align="left">model_names</th>
-<th align="right">loo</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">poisson</td>
-<td align="right">1907.203</td>
-</tr>
-<tr class="even">
-<td align="left">zip</td>
-<td align="right">1903.827</td>
-</tr>
-<tr class="odd">
-<td align="left">negbinom</td>
-<td align="right">1910.701</td>
-</tr>
-</tbody>
-</table>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Show plausible model selected as being parsimonious or having the
-smallest criterion value</li>
-</ol>
+<span><span class="va">bayes_count_models</span><span class="op">$</span><span class="va">loos</span></span>
+<span><span class="co">#&gt;   model_names      loo</span></span>
+<span><span class="co">#&gt; 1     poisson 1907.203</span></span>
+<span><span class="co">#&gt; 2         zip 1903.827</span></span>
+<span><span class="co">#&gt; 3    negbinom 1910.701</span></span></code></pre></div>
+<p>Show plausible model selected as being parsimonious or having the
+smallest criterion value</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DIC"</span>, <span class="st">"WAIC"</span>, <span class="st">"LOO"</span><span class="op">)</span>,</span>
@@ -335,29 +268,11 @@ smallest criterion value</li>
 <span>    <span class="va">bayes_count_models</span><span class="op">$</span><span class="va">waic_best</span>,</span>
 <span>    <span class="va">bayes_count_models</span><span class="op">$</span><span class="va">loo_best</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Plausible model by each selection criterion"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>Plausible model by each selection criterion</caption>
-<thead><tr class="header">
-<th align="left">Model</th>
-<th align="left">Best.Selected</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">DIC</td>
-<td align="left">poisson</td>
-</tr>
-<tr class="even">
-<td align="left">WAIC</td>
-<td align="left">poisson</td>
-</tr>
-<tr class="odd">
-<td align="left">LOO</td>
-<td align="left">poisson</td>
-</tr>
-</tbody>
-</table>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Model Best.Selected</span></span>
+<span><span class="co">#&gt; 1   DIC       poisson</span></span>
+<span><span class="co">#&gt; 2  WAIC       poisson</span></span>
+<span><span class="co">#&gt; 3   LOO       poisson</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -393,15 +308,9 @@ informative priors centered on the values used to generate the data.</p>
 <span><span class="va">nobs</span> <span class="op">&lt;-</span> <span class="fl">300</span> <span class="co"># Non-validation sample size</span></span>
 <span></span>
 <span><span class="co"># Observed counts subject to underreporting</span></span>
-<span><span class="va">yobs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span></span>
-<span>  <span class="va">nobs</span>,</span>
-<span>  lambda <span class="op">=</span> <span class="va">lambda1</span> <span class="op">*</span> <span class="va">p1</span></span>
-<span><span class="op">)</span></span>
+<span><span class="va">yobs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="va">nobs</span>, lambda <span class="op">=</span> <span class="va">lambda1</span> <span class="op">*</span> <span class="va">p1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">yobs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span></span>
-<span>  <span class="va">nobs</span>,</span>
-<span>  lambda <span class="op">=</span> <span class="va">lambda2</span> <span class="op">*</span> <span class="va">p2</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">yobs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="va">nobs</span>, lambda <span class="op">=</span> <span class="va">lambda2</span> <span class="op">*</span> <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="fit-the-two-sample-model-without-validation-data">Fit the two-sample model without validation data<a class="anchor" aria-label="anchor" href="#fit-the-two-sample-model-without-validation-data"></a>
 </h3>
@@ -439,29 +348,11 @@ smallest criterion value</p>
 <span>    <span class="va">bayes_two_count_models</span><span class="op">$</span><span class="va">waic_best</span>,</span>
 <span>    <span class="va">bayes_two_count_models</span><span class="op">$</span><span class="va">loo_best</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Plausible model by each selection criterion"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>Plausible model by each selection criterion</caption>
-<thead><tr class="header">
-<th align="left">Model</th>
-<th align="left">Best.Selected</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">DIC</td>
-<td align="left">poisson</td>
-</tr>
-<tr class="even">
-<td align="left">WAIC</td>
-<td align="left">poisson</td>
-</tr>
-<tr class="odd">
-<td align="left">LOO</td>
-<td align="left">zip</td>
-</tr>
-</tbody>
-</table>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Model Best.Selected</span></span>
+<span><span class="co">#&gt; 1   DIC       poisson</span></span>
+<span><span class="co">#&gt; 2  WAIC       poisson</span></span>
+<span><span class="co">#&gt; 3   LOO           zip</span></span></code></pre></div>
 <p>Notice that thresh = 2 is the default and PSIS-LOO identifies the
 underlying distributions as ZIP. We can inspect the PSIS-LOO values.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -481,7 +372,7 @@ within 4 units of the ZIP value.</p>
 event application. We focus on the unequal underreporting scenario
 presented in the associated article. The implementation for the naive
 model (i.e., assuming no underreporting) and the equal-reporting model
-follows similar steps described below.</p>
+follow similar steps described below.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load data</span></span>
 <span><span class="va">ae_data</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span>
@@ -544,9 +435,8 @@ model diagnostics.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ae_unequal_reporting</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">negbinom</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">BUCM</span><span class="fu">::</span><span class="fu"><a href="../reference/urc_posterior_summary.html">urc_posterior_summary</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span>, exclude <span class="op">=</span> <span class="st">"deviance"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Unequal underreporting"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<caption>Unequal underreporting</caption>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="right">mean</th>

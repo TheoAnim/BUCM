@@ -34,6 +34,7 @@ knitr::opts_chunk$set(
 ```
 
 **BUCM** (Bayesian Underreported Count Models) is an R package for Bayesian analysis of count data with accounting for potential underreporting. The package provides estimation for one-sample and two-sample Poisson, zero-inflated Poisson (ZIP), and negative binomial models. The package assumes either a validation sub-sample or informative priors are available as additional inputs with the main study data.
+
 BUCM provides estimates for naive models, which assume no underreporting, and underreported models that account for incomplete reporting. Model estimation is performed using Markov chain Monte Carlo (MCMC) methods through JAGS.  The package also performs model comparison using DIC, WAIC, and PSIS-LOO in order to determine which of the three count data models fits the observed data the best.
 
 ## Installation
@@ -47,15 +48,15 @@ Install the latest version from **Github**
 
 ## Illustrative Example
 
-As an example, we simulate data from Poisson subject to underreporting. Assume some validation data through which we know the true(latent) event count denoted by
+As an example, we simulate data from Poisson subject to underreporting. Assume some validation data through which we know the true (latent) event count denoted by
 $$Y^{\ast} \sim Poisson(\lambda)$$ 
-where $\lambda > 0$ is the expected(true) count.
+where $\lambda > 0$ is the expected (true) count.
 
 For all units, the reported count $Y$ arises from a binomial mechanism. Conditional on the true count $Y^{\ast}$,
 $$Y|y^{\ast} \sim Binomial(y^{\ast}, p)$$ 
 where $p$ denotes the reporting probability.
 
-For the remaining units(the main study sample), only the underreported counts $Y$ are observed.
+For the remaining units (the main study sample), only the underreported counts $Y$ are observed.
 Marginally, we can derived the distribution of $y$ as:
 $$Y \sim Poisson(\lambda p)$$ 
 
@@ -67,26 +68,16 @@ set.seed(123)
 # Simulation settings
 lambda <- 5
 p <- 0.7
-nv <- 100      # Validation sample size
-nobs <- 300    # Non-validation sample size
+nv <- 100 # Validation sample size
+nobs <- 300 # Non-validation sample size
 
 # Validation sample: latent counts (Y*) and observed counts (Y)
-ystar <- rpois(
-  nv,
-  lambda = lambda
-)
+ystar <- rpois(nv, lambda = lambda)
 
-yval <- rbinom(
-  nv,
-  size = ystar,
-  prob = p
-)
+yval <- rbinom(nv, size = ystar, prob = p)
 
 # Observed counts subject to underreporting
-yobs <- rpois(
-  nobs,
-  lambda = lambda * p
-)
+yobs <- rpois(nobs, lambda = lambda * p)
 ```
 
 Here, `ystar` contains the true counts in the validation sample, `yval`
@@ -172,27 +163,24 @@ bayes_count_models$models$poisson |>
 
 ### Model Selection
 
-(a) Return values for each criterion for each model
+Values of each criterion for the three models
 ```{r}
 # using DIC for model selection
-bayes_count_models$dics |> 
-  kableExtra::kable(caption = "DIC Comparison")
+bayes_count_models$dics 
 ```
 
 ```{r}
 # using WAIC for model selection
-bayes_count_models$waics |> 
-  kableExtra::kable(caption = "WAIC Comparison")
+bayes_count_models$waics 
 ```
 
 ```{r}
 # using PSIS-LOO for model selection
-bayes_count_models$loos |> 
-  kableExtra::kable(caption = "PSIS-LOO Comparison")
+bayes_count_models$loos
 ```
 
 
-(b) Show plausible model selected as being parsimonious or having the smallest criterion value
+Show plausible model selected as being parsimonious or having the smallest criterion value
 
 ```{r}
 data.frame(
@@ -202,8 +190,7 @@ data.frame(
     bayes_count_models$waic_best,
     bayes_count_models$loo_best
   )
-) |>
-  kableExtra::kable(caption = "Plausible model by each selection criterion")
+)
 ```
 
 
@@ -235,16 +222,9 @@ p2 <- 0.6
 nobs <- 300 # Non-validation sample size
 
 # Observed counts subject to underreporting
-yobs1 <- rpois(
-  nobs,
-  lambda = lambda1 * p1
-)
+yobs1 <- rpois(nobs, lambda = lambda1 * p1)
 
-yobs2 <- rpois(
-  nobs,
-  lambda = lambda2 * p2
-)
-
+yobs2 <- rpois(nobs, lambda = lambda2 * p2)
 ```
 
 
@@ -286,8 +266,7 @@ data.frame(
     bayes_two_count_models$waic_best,
     bayes_two_count_models$loo_best
   )
-) |>
-  kableExtra::kable(caption = "Plausible model by each selection criterion")
+)
 ```
 
 Notice that thresh = 2 is the default and PSIS-LOO identifies the underlying distributions as ZIP. We can inspect the PSIS-LOO values.
@@ -300,7 +279,7 @@ In this case, it is reasonable to apply the parsimony rule to choose Poisson  as
 
 ## Adverse Event Application
 
-We demonstrate the implementation of the package using an adverse event application. We focus on the unequal underreporting scenario presented in the associated article. The implementation for the naive model (i.e., assuming no underreporting) and the equal-reporting model follows similar steps described below.
+We demonstrate the implementation of the package using an adverse event application. We focus on the unequal underreporting scenario presented in the associated article. The implementation for the naive model (i.e., assuming no underreporting) and the equal-reporting model follow similar steps described below.
 
 ```{r}
 # load data
@@ -369,7 +348,7 @@ Finally, we can compute the posterior summaries as follows:
 ```{r}
 ae_unequal_reporting$models$negbinom |>
   BUCM::urc_posterior_summary(digits = 2, exclude = "deviance") |>
-  kableExtra::kable(caption = "Unequal underreporting")
+  kableExtra::kable()
 ```
 
 See the `urc_mcmc_naive()` and `urc_two_mcmc_naive` documentation for the required use of the naive case which assumes no underreporting.
