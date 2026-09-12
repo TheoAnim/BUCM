@@ -1,5 +1,4 @@
 #' @title Function to generate data
-#' @export
 urcdata_gen <- function(lambda, p, pi = 0, c = 1, nobs = 100, nv = 0, fun) {
   if (fun == "rpois") {
     ystar <- stats::rpois(nv, lambda)
